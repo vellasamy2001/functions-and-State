@@ -1,75 +1,75 @@
 import React, { useState } from 'react'
-import Child from "./stchild.js"
 
-const Stparent = () => {
-    let employees = [ 
-        { 
-          "id": 11,
-           "name":"Abhinav",
-            "salary":75000
-         },
-     {
-       "id": 2131,
-        "name":"Gaurav",
-         "salary":62000
-       },
-     { 
-      "id": 3012,
-       "name":"Raj",
-        "salary":32000 
-    }]
+let mobiles = [{
+    id:"001",
+    name :"oneplus11",
+    price : 56999,
+    isPurchased: true},
+    {
+    id:"002",
+    name : "Vivi Y100",
+    price : 24999,
+    isPurchased: false},
+    {
+    id:"003",
+    name : "Redmi 10",
+    price : 56999,
+    isPurchased : true},
+    {
+    id:"004",
+    name : "iphone 13",
+    price : 62990,
+    isPurchased : false},
+    {
+    id:"005",
+    name : "Nokia",
+    price : 12000,
+    isPurchased : true},
+    {
+    id:"006",
+    name : "Poco M4",
+    price : 13999,
+    isPurchased : true}]
 
-    const[mobile,setApple]=useState(employees)
+const Main = () => {
+    const [values , setState] = useState(mobiles)
+    
+    let ascending = [...mobiles].sort((a,b) => {
+        let letter = a.name.toLowerCase();
+        let letter2= b.name.toLowerCase();
+        
+        if(letter < letter2){
+            return -1;
+        }else if(letter > letter2){
+            return 1;
+        }
+    })
+    let descending = [...ascending].reverse();
 
-     var kind=()=>{
-       
-        let swim=employees.filter((value)=>{
-            return value.salary > 60000  ;
-           
-        })
 
-      setApple(swim);
-    }
-    var name=(a,b)=>{
-         let sky=employees.filter((value,index)=>{
-            return a.salary <= value.salary;
-         })
-         console.log(sky);
-    }
+    let priceAsc = [...mobiles].sort((a,b) => {
+         return a.price - b.price;
+    })
+    let priceDec = [...priceAsc].reverse();
 
-    var vel=()=>{
-      let s=[ 
-        { 
-          "id": 11,
-           "name":"siva",
-            "salary":75000
-         },
-     {
-       "id": 2131,
-        "name":"vell",
-         "salary":62000
-       },
-     { 
-      "id": 3012,
-       "name":"samy",
-        "salary":32000 
-    }]
-    setApple(s)
-    }
 
+    let purchase = [...mobiles].filter(e => {
+      if(e.isPurchased == true){
+        return e.name;
+      }
+    })
+    
+  
   return (
-    <div><button onClick={()=>vel()}> click</button>
-   <button onClick={()=>kind()}> click</button>
-      {mobile.map((value,index)=>
-      <>
-         <h1> {value.name}</h1>
-         <h2> {value.salary}</h2>
-         </>
-  )}
-    <Child pas={employees} pas2={name} />
-
+    <div>
+      <button onClick={() => setState(ascending)}>Ascending</button>
+      <button onClick={() => setState(descending)}>Descending</button>
+      <button onClick={() => setState(priceAsc)}>Low to High</button>
+      <button onClick={() => setState(priceDec)}>High to Low</button>
+      <button onClick={() =>setState(purchase)}>purchase filter</button>
+      {values.map((e,i) => <h2 key={i}>{e.name} : {e.price}</h2>)}
     </div>
   )
 }
 
-export default Stparent
+export default Main
