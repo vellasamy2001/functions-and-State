@@ -1,5 +1,5 @@
 import React from 'react'
-import Child from "./prop-child.js"
+import Child from "./prop-child"
 
 const Propparent = () => {
     const tasks =[

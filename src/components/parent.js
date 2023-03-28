@@ -27,10 +27,11 @@ const Parent = () => {
         year :2012
         }
         ]
+        
         var vella=(a,b)=>{
             console.log(a,b)
             let vel=books.filter((value,index)=>{
-                return a.year < value.year ;
+                return a.year >= value.year ;
             })
             console.log(vel);
         }
