@@ -5,11 +5,10 @@ const Form = () => {
     const [firstInp, setFirstInp] = useState("");
     const [secondInp, setSecondInp] = useState("");
     const [inputEmpty, setInputEmpty] = useState(false);
-
-    //input get values.........................//
+    const [checkInp,checkEmpty]= useState(false);
     
-    const sameInput = (e) => {
-       if(e.target.name == "inp-1"){
+    const handleInput = (e) => {
+       if(e.target.name == "first"){
           setFirstInp(e.target.value);
        }
        else{
@@ -17,9 +16,16 @@ const Form = () => {
        }
     }
 
-    //submit action............................//
+    const checked=(e)=>{
+      if(e.target.check == false){
+        checkEmpty(false);
+      }
+      else{
+        checkEmpty(true);
+      }
+    }
 
-    const submitHandle = (e) => {
+    const handleSubmit = (e) => {
        e.preventDefault();
 
        setInputEmpty(true);
@@ -27,23 +33,24 @@ const Form = () => {
        let a =[{
         name:firstInp,
         description:secondInp,
-        isComplete:true
+        isComplete:checkInp,
        }];
 
       a.forEach((values) => {
         console.log(values.name, values.description, values.isComplete);
       })
     }
+
   return (
     <div>
-        <form onSubmit={submitHandle}>
-          <input name='inp-1' onChange={sameInput}></input>
+        <form onSubmit={handleSubmit}>
+          <input name='first' onChange={handleInput}></input>
             {firstInp == "" && inputEmpty && <div>Please Fill the first box</div>}
 
-          <input name='inp-2' onChange={sameInput}></input>
+          <input name='second' onChange={handleInput}></input>
             {secondInp == "" && inputEmpty && <div>Please Fill the second box</div>}
 
-          <input name ="check" type="checkbox"></input>
+          <input name ="check" onChange={checked} type="checkbox"></input>
           <input type='submit' ></input>
         </form>
     </div>
